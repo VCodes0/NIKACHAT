@@ -2,7 +2,6 @@ import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gpt_markdown/gpt_markdown.dart';
 import 'package:nikachat/cubit/search_cubit.dart';
 import 'package:nikachat/cubit/search_state.dart';
 import 'package:nikachat/screens/widgets/custom_button.dart';
