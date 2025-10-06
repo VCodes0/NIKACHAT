@@ -14,28 +14,31 @@ class Nikachat extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        scaffoldBackgroundColor: CupertinoColors.white,
-        useMaterial3: true,
-        appBarTheme: AppBarTheme(
-          shadowColor: CupertinoColors.black,
-          centerTitle: true,
-          backgroundColor: CupertinoColors.white,
-          foregroundColor: CupertinoColors.black,
-          elevation: .7,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadiusGeometry.directional(
-              bottomStart: Radius.circular(30),
-              bottomEnd: Radius.circular(30),
+    return BlocProvider(
+      create: (context) => SearchCubit(),
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          scaffoldBackgroundColor: CupertinoColors.white,
+          useMaterial3: true,
+          appBarTheme: AppBarTheme(
+            shadowColor: CupertinoColors.black,
+            centerTitle: true,
+            backgroundColor: CupertinoColors.white,
+            foregroundColor: CupertinoColors.black,
+            elevation: .7,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadiusGeometry.directional(
+                bottomStart: Radius.circular(30),
+                bottomEnd: Radius.circular(30),
+              ),
             ),
+            surfaceTintColor: CupertinoColors.white,
           ),
-          surfaceTintColor: CupertinoColors.white,
         ),
+        title: 'Nikachat',
+        home: HomePage(),
       ),
-      title: 'Nikachat',
-      home: BlocProvider(create: (context) => SearchCubit(), child: HomePage()),
     );
   }
 }

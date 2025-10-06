@@ -1,3 +1,4 @@
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -27,33 +28,34 @@ class HomePage extends StatelessWidget {
               obscureText: false,
               prefixIcon: Icon(CupertinoIcons.search),
             ),
-            Expanded(
-              child: Padding(
-                padding: EdgeInsets.all(8.0),
-                child: Container(
-                  color: Colors.amberAccent,
-                  child: BlocConsumer<SearchCubit, SearchState>(
-                    builder: (_, state) {
-                      if (state is SearchLoadingState) {
-                        return Center(child: CircularProgressIndicator());
-                      }
-                      if (state is SearchLoadedState) {
-                        return GptMarkdown(
+            Padding(
+              padding: EdgeInsets.all(8.0),
+              child: BlocConsumer<SearchCubit, SearchState>(
+                builder: (_, state) {
+                  if (state is SearchLoadingState) {
+                    return Center(child: CircularProgressIndicator());
+                  }
+                  if (state is SearchLoadedState) {
+                    return AnimatedTextKit(
+                      animatedTexts: [
+                        TyperAnimatedText(
                           state.res,
-                          style: TextStyle(fontSize: 20, color: Colors.black),
-                        );
-                      }
-                      return Container();
-                    },
-                    listener: (_, state) {
-                      if (state is SearchErrorState) {
-                        ScaffoldMessenger.of(
-                          context,
-                        ).showSnackBar(SnackBar(content: Text(state.errorMsg)));
-                      }
-                    },
-                  ),
-                ),
+                          speed: Duration(milliseconds: 5),
+                          textAlign: TextAlign.left,
+                        ),
+                      ],
+                    );
+                  }
+
+                  return Container();
+                },
+                listener: (_, state) {
+                  if (state is SearchErrorState) {
+                    ScaffoldMessenger.of(
+                      context,
+                    ).showSnackBar(SnackBar(content: Text(state.errorMsg)));
+                  }
+                },
               ),
             ),
             CustomButton(
